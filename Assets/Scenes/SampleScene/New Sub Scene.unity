@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1173151613761696763, guid: c4f62184f6e40e642b35878691339993, type: 3}
-  SpawnRate: 1
+  SpawnRate: 6
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

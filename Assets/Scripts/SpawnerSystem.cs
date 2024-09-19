@@ -1,20 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 public partial struct SpawnerSystem : ISystem   
 {
     public void OnCreate(ref SystemState state)
     {
-        
     }
 
     public void OnDestroy(ref SystemState state)
     {
-        
     }
 
     public void OnUpdate(ref SystemState state)
@@ -23,12 +18,19 @@ public partial struct SpawnerSystem : ISystem
         {
             if (spawner.ValueRO.NextSpawnTime < SystemAPI.Time.ElapsedTime)
             {
-                Entity newEntity = state.EntityManager.Instantiate(spawner.ValueRO.Prefab);
-                float3 pos = new float3(spawner.ValueRO.SpawnPosition.x, spawner.ValueRO.SpawnPosition.y, 0);
-                state.EntityManager.SetComponentData(newEntity, LocalTransform.FromPosition(pos));
+                SpawnEntityAtPosition(ref state, spawner.ValueRO.Prefab, spawner.ValueRO.SpawnPosition1);
+                SpawnEntityAtPosition(ref state, spawner.ValueRO.Prefab, spawner.ValueRO.SpawnPosition2);
+                SpawnEntityAtPosition(ref state, spawner.ValueRO.Prefab, spawner.ValueRO.SpawnPosition3);
+                SpawnEntityAtPosition(ref state, spawner.ValueRO.Prefab, spawner.ValueRO.SpawnPosition4);
+                
                 spawner.ValueRW.NextSpawnTime = (float)SystemAPI.Time.ElapsedTime + spawner.ValueRO.SpawnRate;
             }
         }
     }
-    
+    private void SpawnEntityAtPosition(ref SystemState state, Entity prefab, float2 position)
+    {
+        Entity newEntity = state.EntityManager.Instantiate(prefab);
+        float3 pos = new float3(position.x, position.y, 0);
+        state.EntityManager.SetComponentData(newEntity, LocalTransform.FromPosition(pos));
+    }
 }

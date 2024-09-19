@@ -98,5 +98,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  SpawnRate: 1
-  Prefab: {fileID: 1173151613761696763}
